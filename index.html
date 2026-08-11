@@ -94,7 +94,9 @@
   }
   nav.links a:hover{ color:var(--gold); }
 
-  .nav-cta{
+  /* Selector must out-specify `nav.links a` above, which sets `padding:4px 0` —
+     a bare `.nav-cta` loses that fight and the button's side padding collapses. */
+  nav.links a.nav-cta{
     background:var(--plum-deep);
     color:var(--white) !important;
     padding:10px 22px;
@@ -104,7 +106,7 @@
     box-shadow:var(--shadow);
     transition:transform .2s, background .2s;
   }
-  .nav-cta:hover{ background:var(--gold); transform:translateY(-2px); }
+  nav.links a.nav-cta:hover{ background:var(--gold); transform:translateY(-2px); }
 
   .menu-btn{ display:none; background:none; border:none; font-size:1.6rem; color:var(--plum-deep); cursor:pointer; }
 
@@ -760,10 +762,6 @@
       <span class="eyebrow" style="background:rgba(255,255,255,0.12); color:var(--cream);">Let's Work Together</span>
       <h2>Have a script in mind?</h2>
       <p>I'd love to hear about your project — get in touch and let's bring it to life.</p>
-      <div class="contact-details">
-        <a class="contact-pill" id="emailPill" href="#contact">✉️ Show email address</a>
-        <a class="contact-pill" href="https://www.linkedin.com/in/christine-k-88049b170/" target="_blank" rel="noopener">🔗 LinkedIn</a>
-      </div>
       <a href="#contact" class="btn btn-primary" id="emailBtn">✉️ Email Me</a>
       <div class="social-row">
         <a href="https://www.linkedin.com/in/christine-k-88049b170/" title="LinkedIn" target="_blank" rel="noopener">in</a>
@@ -789,11 +787,7 @@
   // which keeps it out of the reach of address-harvesting crawlers.
   (function () {
     const addr = atob('Y2hyaXNzaWVraW5nc25vcnRoQGdtYWlsLmNvbQ==');
-    const pill = document.getElementById('emailPill');
-    const btn = document.getElementById('emailBtn');
-    pill.textContent = '✉️ ' + addr;
-    pill.href = 'mailto:' + addr;
-    btn.href = 'mailto:' + addr;
+    document.getElementById('emailBtn').href = 'mailto:' + addr;
   })();
 
   const tabs = document.querySelectorAll('.demo-tab');
