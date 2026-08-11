@@ -761,10 +761,10 @@
       <h2>Have a script in mind?</h2>
       <p>I'd love to hear about your project — get in touch and let's bring it to life.</p>
       <div class="contact-details">
-        <span class="contact-pill">✉️ chrissiekingsnorth@gmail.com</span>
-        <span class="contact-pill">🔗 LinkedIn</span>
+        <a class="contact-pill" id="emailPill" href="#contact">✉️ Show email address</a>
+        <a class="contact-pill" href="https://www.linkedin.com/in/christine-k-88049b170/" target="_blank" rel="noopener">🔗 LinkedIn</a>
       </div>
-      <a href="mailto:chrissiekingsnorth@gmail.com" class="btn btn-primary">✉️ Email Me</a>
+      <a href="#contact" class="btn btn-primary" id="emailBtn">✉️ Email Me</a>
       <div class="social-row">
         <a href="https://www.linkedin.com/in/christine-k-88049b170/" title="LinkedIn" target="_blank" rel="noopener">in</a>
       </div>
@@ -784,6 +784,17 @@
   const navLinks = document.getElementById('navLinks');
   menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
   navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Email address is assembled at runtime so it never appears in the page source,
+  // which keeps it out of the reach of address-harvesting crawlers.
+  (function () {
+    const addr = atob('Y2hyaXNzaWVraW5nc25vcnRoQGdtYWlsLmNvbQ==');
+    const pill = document.getElementById('emailPill');
+    const btn = document.getElementById('emailBtn');
+    pill.textContent = '✉️ ' + addr;
+    pill.href = 'mailto:' + addr;
+    btn.href = 'mailto:' + addr;
+  })();
 
   const tabs = document.querySelectorAll('.demo-tab');
   const panels = document.querySelectorAll('.demo-panel');
